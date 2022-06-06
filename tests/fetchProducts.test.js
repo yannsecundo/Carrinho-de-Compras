@@ -9,21 +9,21 @@ describe('1 - Teste a função fetchProducts', () => {
 
   test('testando se a função é chamada', async () => {
     await fetchProducts('computador')
-    expect(fetchProducts).toHaveBeenCalled();
+    expect(fetch).toHaveBeenCalled();
   });
 
-  test('testando se a função utiliza o endpoint correto', async () => {
-    await fetchProducts('computador')
-    expect(fetchProducts).toBeCalledWith('https://api.mercadolibre.com/sites/MLB/search?q=computador');
+  test('testando se a função utiliza o endpoint https://api.mercadolibre.com/sites/MLB/search?q=computador', async () => {
+    await fetchProducts("computador")
+    expect(fetch).toHaveBeenCalledWith('https://api.mercadolibre.com/sites/MLB/search?q=computador');
   });
 
   test('teste se a função não receber nenhum argumento', async () => {
-    const expect = await fetchProducts('');
-    expect(expect).toEqual(new Error('You must provide an url'))
+    const expected = await fetchProducts();
+    expect(expected).toEqual(new Error('You must provide an url'))
   });
 
-  test(' testa se a função fetchProducts retorna a mesma estrutura de dados de computadorSearch', () => {
-    const expect = fetchProducts();
-    expect(expect).toBeEqual(computadorSearch)
+  test(' testa se a função fetchProducts retorna a mesma estrutura de dados de computadorSearch', async () => {
+    const expected = await fetchProducts('computador');
+    expect(expected).toEqual(computadorSearch)
   });
 });
