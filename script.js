@@ -9,13 +9,7 @@ const createProductImageElement = (imageSource) => {
 };
 
 const SomaItemPrice = () => {
-  let sum = 0;
-  const total = document.querySelector('.valor-total');
-  const arrayList = document.querySelectorAll('li');
-  arrayList.forEach((element) => {
-    sum += parseFloat(element.innerHTML.split('$')[1] * 100);
-  });
-  total.innerHTML = sum / 100;
+  const soma = 0;
 };
 
 const createCustomElement = (element, className, innerText) => {
@@ -32,9 +26,11 @@ const cartItemClickListener = (event) => {
   SomaItemPrice();
 };
 
-const loadLocalStorage = () => {
+const loadLocalStorage = (id) => {
+  const { idtest } = fetchProducts();
   const olList = document.querySelector('ol');
   olList.innerHTML = getSavedCartItems();
+  localStorage.setItem(idtest, olList);
   document.querySelectorAll('li').forEach((element) => {
     element.addEventListener('click', cartItemClickListener);
   });
@@ -80,8 +76,8 @@ const addEventToItems = () => {
       const id = getSkuFromProductItem(event.target.parentNode);
       fetchItem(id).then((data) => {
         addToCart(data);
-        const olDoHtml = document.querySelector(classCartItems).innerHTML;
-        console.log(saveCartItems(olDoHtml));
+        const olDoHtml = classCartItems.innerHTML;
+        saveCartItems(olDoHtml);
         SomaItemPrice();
       });  
     }
