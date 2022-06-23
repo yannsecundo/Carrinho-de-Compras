@@ -8,6 +8,16 @@ const createProductImageElement = (imageSource) => {
   return img;
 };
 
+const SomaItemPrice = () => {
+  let sum = 0;
+  const total = document.querySelector('.valor-total');
+  const arrayList = document.querySelectorAll('li');
+  arrayList.forEach((element) => {
+    sum += parseFloat(element.innerHTML.split('$')[1] * 100);
+  });
+  total.innerHTML = sum / 100;
+};
+
 const createCustomElement = (element, className, innerText) => {
   const e = document.createElement(element);
   e.className = className;
@@ -15,14 +25,11 @@ const createCustomElement = (element, className, innerText) => {
   return e;
 };
 
-const getSavedCarItems = () => {
-  
-};
-
 const cartItemClickListener = (event) => {
   event.target.remove();
   const item = document.querySelector(classCartItems).innerHTML;
   getSavedCarItems(item);
+  SomaItemPrice();
 };
 
 const loadLocalStorage = () => {
@@ -32,6 +39,11 @@ const loadLocalStorage = () => {
     element.addEventListener('click', cartItemClickListener);
   });
 };
+
+document.querySelector('.empty-cart').addEventListener('click', () => {
+  localStorage.clear();
+  document.querySelector('ol').innerHTML = '';
+});
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
   const li = document.createElement('li');
@@ -61,16 +73,6 @@ const createProductItemElement = ({ id: sku, title: name, thumbnail: image }) =>
 };
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
-
-const SomaItemPrice = () => {
-  let sum = 0;
-  const total = document.querySelector('.total-price');
-  const arrayList = document.querySelectorAll('li');
-  arrayList.forEach((element) => {
-    sum += parseFloat(element.innerHTML.split('$')[1] * 100);
-  });
-  total.innerHTML = sum / 100;
-};
 
 const addEventToItems = () => {
   items.addEventListener('click', (event) => {
