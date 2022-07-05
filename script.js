@@ -27,9 +27,9 @@ const createCustomElement = (element, className, innerText) => {
 
 const cartItemClickListener = (event) => {
   event.target.remove();
-  const item = document.querySelector(classCartItems).innerHTML;
-  saveCartItems(item);
-  sumPrices();
+  const olHtml = classCartItems.innerHTML;
+  saveCartItems(olHtml);
+  SomaItemPrice();
 };
 
 const loadLocalStorage = () => {
