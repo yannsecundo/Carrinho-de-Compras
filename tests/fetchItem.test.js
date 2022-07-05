@@ -14,8 +14,8 @@ describe('2 - Teste a função fetchItem', () => {
      await fetchItem("MLB1607748387")
     expect(fetch).toHaveBeenCalledWith("https://api.mercadolibre.com/items/MLB1607748387");
   });
-  it("Test se o retorno da função fetchItem com o id do item  'MLB1607748387' é uma estrutura de dados igual ao objeto item que já está importado no arquivo", async () => {
-    const expected = await fetchItem("MLB1607748387")
+  it("Testa se o retorno da função fetchItem com o argumento do item 'MLB1615760527' é uma estrutura de dados igual ao objeto item que já está importado no arquivo", async () => {
+    const expected = await fetchItem("MLB1615760527")
     expect(expected).toEqual(item);
   });
   it("Test se ao chamar a função fetchItem sem argumento, retorna um erro com a mensagem: 'You must provide an url'", async () => {
